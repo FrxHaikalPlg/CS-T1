@@ -29,7 +29,7 @@ function App() {
             files: [file],
           });
         } catch (error) {
-          console.error('Error sharing:', error);
+          alert('Error sharing: ' + error.message);
         }
       } else {
         alert('Web Share API is not supported in this browser.');
@@ -76,42 +76,63 @@ function App() {
     setFileName(getCurrentDateTime());
   }, []);
 
+  useEffect(() => {
+    const handleBeforeUnload = (event) => {
+      if (photos.length > 0) {
+        const message = "If you refresh, your photos will disappear.";
+        event.returnValue = message; // Standard for most browsers
+        return message; // For some older browsers
+      }
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, [photos]);
+
   return (
     <div className="app-container">
-      {/* Input untuk nama file PDF */}
       <input
         type="text"
         value={fileName}
         onChange={(e) => setFileName(e.target.value)}
         className="filename-input"
         style={{ paddingLeft: '30px' }}
-        placeholder={getCurrentDateTime()} // Placeholder dengan format yang diinginkan
+        placeholder={getCurrentDateTime()}
       />
-      {/* Komponen Kamera */}
       <Camera onCapture={handleCapture} />
-      <div className="photos-container">
-        {photos.map((photo, index) => (
-          <div key={index} className="photo-item">
-            <img src={photo} alt={`Captured ${index}`} className="photo-image" />
-            <button
-              className="delete-photo-btn"
-              onClick={() => handleDeletePhoto(index)}
-            >
-              Delete
-            </button>
-          </div>
-        ))}
+      {photos.length === 0 ? (
+        <div className="no-photos-message">
+          <i className="fa fa-camera-retro fa-3x" style={{ color: 'grey' }}></i>
+          <p>No picture detected, please take a picture.</p>
+        </div>
+      ) : (
+        <div className="photos-container">
+          {photos.map((photo, index) => (
+            <div key={index} className="photo-item">
+              <img src={photo} alt={`Captured ${index}`} className="photo-image" />
+              <button
+                className="delete-photo-btn"
+                onClick={() => handleDeletePhoto(index)}
+              >
+                Delete
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
+      <div className="trademark">
+        Made by Alif, Haikal, and Kanza ™
       </div>
       <div className="footer-container">
-        {/* Tombol untuk mengambil gambar */}
         <button className="footer-button" onClick={() => document.getElementById('cameraInput').click()}>
           <i className="fa fa-camera"></i> Take Picture
         </button>
-        {/* Tombol untuk menyimpan sebagai PDF */}
         <button className="footer-button" onClick={handleDownload}>
           <i className="fa fa-save"></i> Save as PDF
         </button>
-        {/* Tombol untuk berbagi sebagai PDF */}
         <button className="footer-button" onClick={handleShare}>
           <i className="fa fa-share-alt"></i> Share as PDF
         </button>

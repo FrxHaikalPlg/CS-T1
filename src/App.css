@@ -51,7 +51,7 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-bottom: 70px; /* Tambahkan padding bawah yang setara dengan tinggi footer */
+  padding-bottom: 100px; /* Tambahkan padding bawah yang setara dengan tinggi footer */
 }
 
 /* Styles for camera and input elements */
@@ -175,4 +175,27 @@ html, body {
 
 .delete-photo-btn:hover {
   background-color: #555555;
+}
+
+.no-photos-message {
+  color: grey;
+  font-size: 16px;
+  margin: 20px;
+  text-align: center;
+  margin-top: 250px;
+}
+
+.no-photos-message i {
+  margin-bottom: 10px; /* Space between icon and text */
+}
+
+.trademark {
+  color: #e0e0e0;
+  font-size: 12px;
+  text-align: center;
+  margin-top: 30px;
+  position: fixed;
+  width: 100%;
+  bottom: 100px; /* Adjust this value based on the height of your footer */
+  opacity: 0.5;
 }
