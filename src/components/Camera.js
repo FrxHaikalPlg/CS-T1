@@ -22,6 +22,7 @@ function Camera({ onCapture }) {
         accept="image/*"
         capture="environment" // Suggests the device to use the rear camera
         onChange={handleCapture}
+        className="camera-input"
         style={{ display: 'none' }}
       />
       <button className="take-picture-btn" onClick={() => document.getElementById('cameraInput').click()}>Take Picture</button>

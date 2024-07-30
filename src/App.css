@@ -1,5 +1,23 @@
+html, body {
+  width: 100vw; /* Sets the width to be 100% of the viewport width */
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+  margin: 0; /* Remove default margin */
+  padding: 0; /* Ensure no padding is affecting the width */
+  background-color: #121212; /* Dark background for the entire page */
+  color: #e0e0e0; /* Light text color for better readability */
+  font-family: Arial, sans-serif; /* Set a default font for the page */
+}
+
 .App {
   text-align: center;
+  background-color: #121212; /* Dark background for the app */
+  color: #e0e0e0; /* Light text color for better readability */
+  width: 100%;
+  height: 100%;
+  display: flex; /* Using flex to center and manage children */
+  flex-direction: column; /* Stack children vertically */
+  align-items: center; /* Center children horizontally */
+  justify-content: center; /* Center children vertically */
 }
 
 .App-logo {
@@ -14,18 +32,18 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #1c1c1c; /* Darker shade for header */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: #e0e0e0; /* Light text color */
 }
 
 .App-link {
-  color: #61dafb;
+  color: #61dafb; /* Keep link color for contrast */
 }
 
 @keyframes App-logo-spin {
@@ -35,4 +53,79 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+/* Styles for the entire app */
+.app-container {
+  text-align: center;
+  width: 100%; /* Full width */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Styles for camera and input elements */
+.camera-container {
+  width: 100%; /* Ensure full width */
+  display: flex;
+  justify-content: center; /* Center camera button horizontally */
+  margin: 20px 0; /* Only vertical margin */
+}
+
+.camera-input {
+  display: none; /* Keeps input hidden */
+}
+
+.take-picture-btn,
+.share-pdf-btn,
+.download-pdf-btn,
+.delete-photo-btn {
+  margin: 10px;
+  padding: 8px 16px;
+  background-color: #333333; /* Darker buttons */
+  color: #e0e0e0; /* Light text */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.take-picture-btn:hover,
+.share-pdf-btn:hover,
+.download-pdf-btn:hover,
+.delete-photo-btn:hover {
+  background-color: #555555; /* Even darker on hover */
+}
+
+/* Styles for the filename input */
+.filename-input {
+  position: sticky; /* Membuat input sticky */
+  top: 0; /* Menempel di bagian atas halaman */
+  z-index: 1000; /* Pastikan berada di atas elemen lain */
+  background-color: #333333; /* Dark background for input */
+  margin: 0; /* Menghilangkan margin untuk menempel sempurna di atas */
+  padding: 8px;
+  border: 2px solid #777; /* Darker border */
+  border-radius: 4px;
+  width: 100%; /* Membuat input memenuhi lebar container */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3); /* Darker shadow */
+  color: #e0e0e0; /* Light text */
+}
+
+/* Styles for displaying photos */
+.photos-container {
+  width: 100%; /* Ensure full width */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.photo-item {
+  margin: 10px;
+  width: calc(100% - 20px); /* Adjust width to account for margin */
+}
+
+.photo-image {
+  max-width: 100%;
+  height: auto;
+  display: block;
 }

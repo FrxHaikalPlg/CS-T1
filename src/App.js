@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Camera from './components/Camera';
 import generatePDF from './components/GeneratePDF';
+import './App.css';
 
 function App() {
   const [photos, setPhotos] = useState([]);
@@ -53,23 +54,24 @@ function App() {
   };
 
   return (
-    <div>
+    <div className="app-container">
       <input
         type="text"
         value={fileName}
         onChange={(e) => setFileName(e.target.value)}
+        className="filename-input"
       />
       <Camera onCapture={handleCapture} />
-      <div>
+      <div className="photos-container">
         {photos.map((photo, index) => (
-          <div key={index}>
-            <img src={photo} alt={`Captured ${index}`} style={{ maxWidth: '100%' }} />
-            <button onClick={() => deletePhoto(index)}>Delete</button>
+          <div key={index} className="photo-item">
+            <img src={photo} alt={`Captured ${index}`} className="photo-image" />
+            <button onClick={() => deletePhoto(index)} className="delete-photo-btn">Delete</button>
           </div>
         ))}
       </div>
-      <button onClick={handleShare}>Share PDF</button>
-      <button onClick={handleDownload}>Download PDF</button>
+      <button className="share-pdf-btn" onClick={handleShare}>Share PDF</button>
+      <button className="download-pdf-btn" onClick={handleDownload}>Download PDF</button>
     </div>
   );
 }
