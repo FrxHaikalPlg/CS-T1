@@ -25,7 +25,6 @@ function Camera({ onCapture }) {
         className="camera-input"
         style={{ display: 'none' }}
       />
-      <button className="take-picture-btn" onClick={() => document.getElementById('cameraInput').click()}>Take Picture</button>
     </div>
   );
 }

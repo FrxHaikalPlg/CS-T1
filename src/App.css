@@ -31,17 +31,6 @@ html, body {
   }
 }
 
-.App-header {
-  background-color: #1c1c1c; /* Darker shade for header */
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: #e0e0e0; /* Light text color */
-}
-
 .App-link {
   color: #61dafb; /* Keep link color for contrast */
 }
@@ -62,6 +51,7 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-bottom: 70px; /* Tambahkan padding bawah yang setara dengan tinggi footer */
 }
 
 /* Styles for camera and input elements */
@@ -103,12 +93,19 @@ html, body {
   z-index: 1000; /* Pastikan berada di atas elemen lain */
   background-color: #333333; /* Dark background for input */
   margin: 0; /* Menghilangkan margin untuk menempel sempurna di atas */
-  padding: 8px;
-  border: 2px solid #777; /* Darker border */
-  border-radius: 4px;
+  padding: 10px 20px; /* Padding yang sama dengan footer */
+  padding-left: 30px; /* Menambahkan lebih banyak padding di sisi kiri */
+  border: none; /* Menghilangkan border */
+  border-radius: 0; /* Menghilangkan border radius untuk tampilan yang flat */
   width: 100%; /* Membuat input memenuhi lebar container */
   box-shadow: 0 2px 4px rgba(0,0,0,0.3); /* Darker shadow */
   color: #e0e0e0; /* Light text */
+  font-size: 16px; /* Ukuran font yang sesuai */
+}
+
+/* Menambahkan transisi untuk efek visual saat input menjadi sticky */
+.filename-input {
+  transition: all 0.3s ease-in-out;
 }
 
 /* Styles for displaying photos */
@@ -128,4 +125,54 @@ html, body {
   max-width: 100%;
   height: auto;
   display: block;
+}
+
+.footer-button i {
+  font-size: 24px; /* Adjust icon size */
+  margin-bottom: 4px; /* Space between icon and text */
+  color: #e0e0e0; /* Icon color */
+}
+
+.footer-button {
+  flex: 1;
+  text-align: center;
+  border: none;
+  background: none;
+  color: inherit;
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 0; /* Padding kecil untuk tombol */
+}
+
+.footer-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0; /* Menambahkan ini untuk memastikan footer memenuhi lebar */
+  background-color: #333333; /* Warna latar belakang gelap */
+  color: #e0e0e0; /* Warna teks terang */
+  display: flex;
+  justify-content: space-around;
+  align-items: center; /* Tengah secara vertikal */
+  padding: 10px 20px; /* Padding horizontal dan vertikal */
+  box-shadow: 0 -2px 4px rgba(0,0,0,0.3); /* Bayangan untuk efek elevasi */
+  height: 50px; /* Tentukan tinggi footer */
+}
+
+.delete-photo-btn {
+  display: inline-block; /* Pastikan tombol terlihat */
+  margin: 10px;
+  padding: 8px 16px;
+  background-color: #333333;
+  color: #e0e0e0;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.delete-photo-btn:hover {
+  background-color: #555555;
 }
