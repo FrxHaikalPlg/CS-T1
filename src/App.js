@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Camera from './components/Camera';
 import generatePDF from './components/GeneratePDF';
+import './App.css';
 
 function App() {
   const [photos, setPhotos] = useState([]);
@@ -47,29 +48,44 @@ function App() {
     document.body.removeChild(link);
   };
 
-  const deletePhoto = (index) => {
-    const newPhotos = photos.filter((_, i) => i !== index);
-    setPhotos(newPhotos);
+  const handleDeletePhoto = (indexToDelete) => {
+    setPhotos(photos.filter((_, index) => index !== indexToDelete));
   };
 
   return (
-    <div>
+    <div className="app-container">
       <input
         type="text"
         value={fileName}
         onChange={(e) => setFileName(e.target.value)}
+        className="filename-input"
+        style={{ paddingLeft: '30px' }}
       />
       <Camera onCapture={handleCapture} />
-      <div>
+      <div className="photos-container">
         {photos.map((photo, index) => (
-          <div key={index}>
-            <img src={photo} alt={`Captured ${index}`} style={{ maxWidth: '100%' }} />
-            <button onClick={() => deletePhoto(index)}>Delete</button>
+          <div key={index} className="photo-item">
+            <img src={photo} alt={`Captured ${index}`} className="photo-image" />
+            <button
+              className="delete-photo-btn"
+              onClick={() => handleDeletePhoto(index)}
+            >
+              Delete
+            </button>
           </div>
         ))}
       </div>
-      <button onClick={handleShare}>Share PDF</button>
-      <button onClick={handleDownload}>Download PDF</button>
+      <div className="footer-container">
+      <button className="footer-button" onClick={() => document.getElementById('cameraInput').click()}>
+          <i className="fa fa-camera"></i> Take Picture
+        </button>
+        <button className="footer-button" onClick={handleDownload}>
+          <i className="fa fa-save"></i> Save as PDF
+        </button>
+        <button className="footer-button" onClick={handleShare}>
+          <i className="fa fa-share-alt"></i> Share as PDF
+        </button>
+      </div>
     </div>
   );
 }

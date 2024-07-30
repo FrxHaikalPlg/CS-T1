@@ -14,7 +14,7 @@ function Camera({ onCapture }) {
   };
 
   return (
-    <div>
+    <div className="camera-container">
       {/* File input for capturing photos */}
       <input
         id="cameraInput"
@@ -22,9 +22,9 @@ function Camera({ onCapture }) {
         accept="image/*"
         capture="environment" // Suggests the device to use the rear camera
         onChange={handleCapture}
+        className="camera-input"
         style={{ display: 'none' }}
       />
-      <button onClick={() => document.getElementById('cameraInput').click()}>Take Picture</button>
     </div>
   );
 }
