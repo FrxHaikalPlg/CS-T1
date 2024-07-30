@@ -14,7 +14,7 @@ function Camera({ onCapture }) {
   };
 
   return (
-    <div>
+    <div className="camera-container">
       {/* File input for capturing photos */}
       <input
         id="cameraInput"
@@ -24,7 +24,7 @@ function Camera({ onCapture }) {
         onChange={handleCapture}
         style={{ display: 'none' }}
       />
-      <button onClick={() => document.getElementById('cameraInput').click()}>Take Picture</button>
+      <button className="take-picture-btn" onClick={() => document.getElementById('cameraInput').click()}>Take Picture</button>
     </div>
   );
 }
