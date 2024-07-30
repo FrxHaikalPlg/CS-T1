@@ -4,15 +4,19 @@ import generatePDF from './components/GeneratePDF';
 
 function App() {
   const [photos, setPhotos] = useState([]);
-  const [showPreview, setShowPreview] = useState(false);
+  const [fileName, setFileName] = useState('dokumen');
 
   const handleCapture = (photo) => {
     setPhotos([...photos, photo]);
   };
 
   const handleShare = async () => {
-    const pdfBlob = generatePDF(photos);
-    const file = new File([pdfBlob], 'photos.pdf', { type: 'application/pdf' });
+    if (photos.length === 0) {
+      alert('No photos to share.');
+      return;
+    }
+    const pdfBlob = await generatePDF(photos);
+    const file = new File([pdfBlob], fileName, { type: 'application/pdf' });
 
     if (navigator.share) {
       try {
@@ -28,19 +32,19 @@ function App() {
     }
   };
 
-  const handleDownload = () => {
-    const pdfBlob = generatePDF(photos);
+  const handleDownload = async () => {
+    if (photos.length === 0) {
+      alert('No photos to download.');
+      return;
+    }
+    const pdfBlob = await generatePDF(photos);
     const url = URL.createObjectURL(pdfBlob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = 'photos.pdf';
+    link.download = fileName;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-  };
-
-  const togglePreview = () => {
-    setShowPreview(!showPreview);
   };
 
   const deletePhoto = (index) => {
@@ -50,19 +54,20 @@ function App() {
 
   return (
     <div>
+      <input
+        type="text"
+        value={fileName}
+        onChange={(e) => setFileName(e.target.value)}
+      />
       <Camera onCapture={handleCapture} />
-      <button onClick={togglePreview}>{showPreview ? 'Hide Preview' : 'Show Preview'}</button>
-      {showPreview && (
-        <div style={{ position: 'fixed', top: '10%', left: '10%', width: '80%', height: '80%', backgroundColor: 'white', overflow: 'auto', zIndex: 1000 }}>
-          <button onClick={togglePreview} style={{ position: 'absolute', right: 20, top: 20 }}>Close</button>
-          {photos.map((photo, index) => (
-            <div key={index}>
-              <img src={photo} alt={`Captured ${index}`} style={{ maxWidth: '100%' }} />
-              <button onClick={() => deletePhoto(index)}>Delete</button>
-            </div>
-          ))}
-        </div>
-      )}
+      <div>
+        {photos.map((photo, index) => (
+          <div key={index}>
+            <img src={photo} alt={`Captured ${index}`} style={{ maxWidth: '100%' }} />
+            <button onClick={() => deletePhoto(index)}>Delete</button>
+          </div>
+        ))}
+      </div>
       <button onClick={handleShare}>Share PDF</button>
       <button onClick={handleDownload}>Download PDF</button>
     </div>
