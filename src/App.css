@@ -52,6 +52,8 @@ html, body {
   flex-direction: column;
   align-items: center;
   padding-bottom: 100px; /* Tambahkan padding bawah yang setara dengan tinggi footer */
+  overflow: visible; /* Ensures that sticky positioning can work */
+
 }
 
 /* Styles for camera and input elements */
@@ -88,7 +90,7 @@ html, body {
 
 /* Styles for the filename input */
 .filename-input {
-  position: sticky; /* Membuat input sticky */
+  position: fixed; /* Membuat input sticky */
   top: 0; /* Menempel di bagian atas halaman */
   z-index: 1000; /* Pastikan berada di atas elemen lain */
   background-color: #333333; /* Dark background for input */
