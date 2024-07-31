@@ -88,7 +88,7 @@ html, body {
 
 /* Styles for the filename input */
 .filename-input {
-  position: sticky; /* Membuat input sticky */
+  position: fixed; /* Membuat input fixed */
   top: 0; /* Menempel di bagian atas halaman */
   z-index: 1000; /* Pastikan berada di atas elemen lain */
   background-color: #333333; /* Dark background for input */
