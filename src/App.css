@@ -71,7 +71,8 @@ html, body {
 .take-picture-btn,
 .share-pdf-btn,
 .download-pdf-btn,
-.delete-photo-btn {
+.delete-photo-btn,
+.move-photo-btn {
   margin: 10px;
   padding: 8px 16px;
   background-color: #333333; /* Darker buttons */
@@ -84,13 +85,14 @@ html, body {
 .take-picture-btn:hover,
 .share-pdf-btn:hover,
 .download-pdf-btn:hover,
-.delete-photo-btn:hover {
+.delete-photo-btn:hover,
+.move-photo-btn:hover {
   background-color: #555555; /* Even darker on hover */
 }
 
 /* Styles for the filename input */
 .filename-input {
-  position: fixed; /* Membuat input sticky */
+  position: fixed; /* Membuat input fixed */
   top: 0; /* Menempel di bagian atas halaman */
   z-index: 1000; /* Pastikan berada di atas elemen lain */
   background-color: #333333; /* Dark background for input */
@@ -121,12 +123,17 @@ html, body {
 .photo-item {
   margin: 10px;
   width: calc(100% - 20px); /* Adjust width to account for margin */
+  position: relative; /* Needed for the highlight */
 }
 
 .photo-image {
   max-width: 100%;
   height: auto;
   display: block;
+}
+
+.photo-item.highlight {
+  border: 2px solid #61dafb; /* Highlight border */
 }
 
 .footer-button i {

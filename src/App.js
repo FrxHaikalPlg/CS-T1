@@ -6,6 +6,7 @@ import './App.css';
 function App() {
   const [photos, setPhotos] = useState([]);
   const [fileName, setFileName] = useState('');
+  const [moveIndex, setMoveIndex] = useState(null);
 
   // Fungsi untuk menangani pengambilan foto
   const handleCapture = (photo) => {
@@ -60,6 +61,19 @@ function App() {
     setPhotos(photos.filter((_, index) => index !== indexToDelete));
   };
 
+  // Fungsi untuk memindahkan foto
+  const handleMovePhoto = (index) => {
+    if (moveIndex === null) {
+      setMoveIndex(index);
+    } else {
+      const updatedPhotos = [...photos];
+      const [movedPhoto] = updatedPhotos.splice(moveIndex, 1);
+      updatedPhotos.splice(index, 0, movedPhoto);
+      setPhotos(updatedPhotos);
+      setMoveIndex(null);
+    }
+  };
+
   // Fungsi untuk mendapatkan tanggal dan jam saat ini
   const getCurrentDateTime = () => {
     const now = new Date();
@@ -111,7 +125,7 @@ function App() {
       ) : (
         <div className="photos-container">
           {photos.map((photo, index) => (
-            <div key={index} className="photo-item">
+            <div key={index} className={`photo-item ${moveIndex === index ? 'highlight' : ''}`}>
               <img src={photo} alt={`Captured ${index}`} className="photo-image" />
               <button
                 className="delete-photo-btn"
@@ -119,8 +133,19 @@ function App() {
               >
                 Delete
               </button>
+              <button
+                className="move-photo-btn"
+                onClick={() => handleMovePhoto(index)}
+              >
+                {moveIndex === null ? 'Move' : 'Place Here'}
+              </button>
             </div>
           ))}
+          {moveIndex !== null && (
+            <div className="move-instructions">
+              <p>Click on the position where you want to place the selected photo.</p>
+            </div>
+          )}
         </div>
       )}
       <div className="trademark">
